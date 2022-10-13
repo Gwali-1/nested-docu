@@ -1,0 +1,22 @@
+{
+  "name": "nested-docu",
+  "version": "1.0.0",
+  "description": "nested-docu module helps you create mongodb collections with nested documents easily",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "gwali",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gwali-1/nested-docu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Gwali-1/nested-docu/issues"
+  },
+  "homepage": "https://github.com/Gwali-1/nested-docu#readme",
+  "dependencies": {
+    "moongose": "^1.0.0"
+  }
+}
