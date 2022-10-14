@@ -44,23 +44,25 @@ const addNestedDocuById = function(options,fn){
 
 
     model.findById(id,function(err,returned){
-        if(returned[docuField]){
+        if(returned.hasOwnProperty(docuField)){
+            console.log("yes");
             model.findByIdAndUpdate(id,{"$push":{[docuField]:docu}},(err,response) => {
                 if(err){
                  return fn(err,null);
                 }
                 return fn(null,response);
             })
+        }else{
+            model.findByIdAndUpdate(id,{[docuField]:[docu]},(err,response) => {
+                if(err){
+                    return fn(err,null);
+                }
+                fn(null, response);
+            })
+            
         }
 
-        model.findByIdAndUpdate(id,{docuField:docu},(err,response) => {
-            if(err){
-                return fn(err,null);
-            }
-            fn(null, response);
-        })
-    })
-    ;
+    });
 
 }
 
