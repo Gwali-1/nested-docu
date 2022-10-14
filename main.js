@@ -24,6 +24,7 @@ const createModel  = function(fields,name){
 }
 
 
+
 const addNestedDocuById = function(options,fn){
     const fields = ["model","id",'docu',"docuField"];
     for(const key of fields){
@@ -39,15 +40,16 @@ const addNestedDocuById = function(options,fn){
 
 
     const {model,id,docu,docuField} = options;
+    console.log(docuField);
 
 
     model.findById(id,function(err,returned){
-        if(returned.docuField){
-            model.findByIdAndUpdate(id,{"$push":{docuField:docu}},(err,response) => {
+        if(returned[docuField]){
+            model.findByIdAndUpdate(id,{"$push":{[docuField]:docu}},(err,response) => {
                 if(err){
-                 return fn(err,null)
+                 return fn(err,null);
                 }
-                return fn(null,response)
+                return fn(null,response);
             })
         }
 
@@ -63,3 +65,10 @@ const addNestedDocuById = function(options,fn){
 }
 
 
+module.exports = {
+    "createModel":createModel,
+    "addNestedDocuById":addNestedDocuById
+}
+
+
+//crate add documents  to be nested in specified model before nesting it 
