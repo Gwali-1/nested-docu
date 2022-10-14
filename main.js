@@ -44,6 +44,7 @@ const addNestedDocuById = function(options,fn){
 
 
     model.findById(id,function(err,returned){
+        
         if(returned.hasOwnProperty(docuField)){
             console.log("yes");
             model.findByIdAndUpdate(id,{"$push":{[docuField]:docu}},(err,response) => {
