@@ -1,4 +1,4 @@
-const {createModel,addNestedDocuById,makeFilterString} = require("../main");
+const {createModel,addNestedDocuById,makeFilterString,parentDocumentquerystring} = require("../main");
 const mongoose = require("mongoose");
 
 
@@ -57,6 +57,7 @@ mongoose.connect("mongodb://localhost:27017/moduletestDB").then(() =>{
 
 
     console.log(makeFilterString("comments",[2,4,5]));
+    console.log(parentDocumentquerystring("comments",[2,4,5]));
 
     console.log("module created");
 

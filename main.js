@@ -30,6 +30,15 @@ const makeFilterString  = function(docuField,path){
     return filterString
 }
 
+const parentDocumentquerystring = function(docufield,path){
+    path.pop();
+    for(const index  of path){
+        filterString+=`.${index}.${docuField}`
+    }
+    return filterString
+
+}
+
 
 
 //add nested object using path property on parent object
@@ -38,12 +47,12 @@ const makeFilterString  = function(docuField,path){
 const addNestedDocuByPath = function(path,modelName,docu,id,docuField){
     const filterString = makeFilterString(docuField,path);
 
-   model
-
     modelName.findByIdAndUpdate(id,{"$push":{filterString:docu }},(err,response) => {
         if(err){
          console.log(err);
+         return
         }
+        
         ;
     })
 
@@ -119,7 +128,8 @@ const addNestedDocuById = function(options,fn){
 module.exports = {
     "createModel":createModel,
     "addNestedDocuById":addNestedDocuById,
-    "makeFilterString":makeFilterString
+    "makeFilterString":makeFilterString,
+    "parentDocumentquerystring":parentDocumentquerystring
 }
 
 
