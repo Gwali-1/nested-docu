@@ -1,4 +1,4 @@
-const {createModel,addNestedDocuById} = require("../main");
+const {createModel,addNestedDocuById,makeFilterString} = require("../main");
 const mongoose = require("mongoose");
 
 
@@ -13,9 +13,9 @@ mongoose.connect("mongodb://localhost:27017/moduletestDB").then(() =>{
     const person = createModel(schema,"person");
 
     const entry = new person({
-        name:"malon",
-        age:454,
-        wifeName:"joyce"
+        name:"willy",
+        age:4,
+        wifeName:"hardy"
 
     });
 
@@ -29,8 +29,8 @@ mongoose.connect("mongodb://localhost:27017/moduletestDB").then(() =>{
 
     const options = {
         "model":person,
-        id:"634a1281fc000e9f7dbec35f",
-        docu:{father:"shandddddd",mother:"maolll"},
+        id:"634af140d06da2ba3982999e",
+        docu:{father:"elder",mother:"tongue"},
         docuField:"extended_family"
     }
 
@@ -40,7 +40,23 @@ mongoose.connect("mongodb://localhost:27017/moduletestDB").then(() =>{
             return;
         }
 
+        console.log(result)
     });
+
+    // person.findById("634a1281fc000e9f7dbec35f",function(err,res){
+    //     if(!res){
+    //         console.log(`No document found with id`);
+    //     }
+    //  console.log(err);
+    //  console.log(res);
+    // })
+
+
+
+
+
+
+    console.log(makeFilterString("comments",[2,4,5]));
 
     console.log("module created");
 

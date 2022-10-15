@@ -16,9 +16,37 @@ const createModel  = function(fields,name){
         return  mongoose.model(name,newSchema);
     }catch(err){
         console.log(err);
-        throw(err);
 
     }
+
+
+}
+
+const makeFilterString  = function(docuField,path){
+    let filterString = `${docuField}`;
+    for(const index  of path){
+        filterString+=`.${index}.${docuField}`
+    }
+    return filterString
+}
+
+
+
+//add nested object using path property on parent object
+//you locate thr parent object we'll insert with the path 
+//need a query string builder , need to write a fuction for that
+const addNestedDocuByPath = function(path,modelName,docu,id,docuField){
+    const filterString = makeFilterString(docuField,path);
+
+   model
+
+    modelName.findByIdAndUpdate(id,{"$push":{filterString:docu }},(err,response) => {
+        if(err){
+         console.log(err);
+        }
+        ;
+    })
+
 
 
 }
@@ -45,31 +73,38 @@ const addNestedDocuById = function(options,fn){
 
     model.findById(id,function(err,returned){
         if(err){
-            throw(err);
-        }
-        
-        if(returned.hasOwnProperty(docuField)){
-            console.log("this is it =>",returned[docuField].length);
-            const l = returned[docuField].length;
-            docu.path = [];
-            docu.path.push(l);
-;            console.log("this is it =>",returned[docuField]);
-            model.findByIdAndUpdate(id,{"$push":{[docuField]:docu }},(err,response) => {
-                if(err){
-                 return fn(err,null);
-                }
-                return fn(null,response);
-            })
+           return fn(err,null);
         }else{
-            docu.path = [];
-            docu.path.push(0);
-            model.findByIdAndUpdate(id,{[docuField]:[docu]},(err,response) => {
-                if(err){
-                    return fn(err,null);
-                }
-                fn(null, response);
-            })
-            
+            if(!returned){
+                return fn(new Error(`No document found with id ${id}`));
+            }
+            if(returned.hasOwnProperty(docuField)){
+                console.log("this is it =>",returned[docuField].length);
+                const NestedArrayLength = returned[docuField].length; //to see how many nested objects in the the first level
+                docu.path = [];
+                docu[docuField] = [];
+                //add  head document id to each nested docu  parentId:returned._id
+                docu.path.push(NestedArrayLength);
+                console.log("this is it =>",returned[docuField]);
+                model.findByIdAndUpdate(id,{"$push":{[docuField]:docu }},(err,response) => {
+                    if(err){
+                     return fn(err,null);
+                    }
+                    return fn(null,response);
+                })
+            }else{
+                docu.path = [];
+                docu[docuField] = [];
+                docu.path.push(0);
+                model.findByIdAndUpdate(id,{[docuField]:[docu]},(err,response) => {
+                    if(err){
+                        return fn(err,null);
+                    }
+                    fn(null, response);
+                })
+                
+            }
+
         }
 
     });
@@ -77,9 +112,14 @@ const addNestedDocuById = function(options,fn){
 }
 
 
+
+
+
+
 module.exports = {
     "createModel":createModel,
-    "addNestedDocuById":addNestedDocuById
+    "addNestedDocuById":addNestedDocuById,
+    "makeFilterString":makeFilterString
 }
 
 
