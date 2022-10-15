@@ -29,8 +29,8 @@ mongoose.connect("mongodb://localhost:27017/moduletestDB").then(() =>{
 
     const options = {
         "model":person,
-        id:"6348db2df5ab1a30eaa018f5",
-        docu:{father:"shand",mother:"lukaaaa"},
+        id:"634a1281fc000e9f7dbec35f",
+        docu:{father:"shandddddd",mother:"maolll"},
         docuField:"extended_family"
     }
 
@@ -40,8 +40,7 @@ mongoose.connect("mongodb://localhost:27017/moduletestDB").then(() =>{
             return;
         }
 
-        console.log(result);
-    })
+    });
 
     console.log("module created");
 
