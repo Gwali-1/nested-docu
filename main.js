@@ -30,33 +30,59 @@ const makeFilterString  = function(docuField,path){
     return filterString
 }
 
-const parentDocumentquerystring = function(docufield,path){
-    path.pop();
-    for(const index  of path){
-        filterString+=`.${index}.${docuField}`
-    }
-    return filterString
+// const parentDocumentquerystring = function(docuField,path){
+//     let filterString = `${docuField}`;
+//    path.forEach((key,index) => {
+//     if(index === path.length - 1 ){
+//         filterString+=`[${key}]`;
+//     }else{
+//         filterString+=`[${key}].${docuField}`;
+//     }
+//    });
 
-}
+//    return filterString;
+
+
+// }
 
 
 
 //add nested object using path property on parent object
 //you locate thr parent object we'll insert with the path 
 //need a query string builder , need to write a fuction for that
-const addNestedDocuByPath = function(path,modelName,docu,id,docuField){
-    const filterString = makeFilterString(docuField,path);
+const addNestedDocuByPath = function(path,modelName,docu,id,docuField){ //make argument into an object
+   
 
-    modelName.findByIdAndUpdate(id,{"$push":{filterString:docu }},(err,response) => {
+    modelName.findById(id,function(err,returned){
         if(err){
-         console.log(err);
-         return
+            console.log(err);
+            return;
         }
+
+        const filterString = makeFilterString(docuField,path); //query string to locate desired object and do insertion
+        const newPath = path.slice();
+        // console.log(returned)
+        let parentObject = returned[docuField];
+
+        newPath.forEach((key) => {
+            parentObject = parentObject[key][docuField]   //get the deep nested array conteaining nested objects to determine its size
+        });
         
-        ;
-    })
+        console.log(filterString)
+        docu.path=[...path,parentObject.length];  // path to new inserted document
+        docu.extended_family=[]
 
-
+        modelName.findByIdAndUpdate(id,{"$push":{[filterString]:docu }},(err,response) => {  //insert docu
+            if(err){
+             console.log(err);
+             return
+            }
+            
+            console.log(response);
+        })
+    }).select(docuField);// select first level of nesting then use it to locate desired document
+    
+    
 
 }
 
@@ -129,7 +155,8 @@ module.exports = {
     "createModel":createModel,
     "addNestedDocuById":addNestedDocuById,
     "makeFilterString":makeFilterString,
-    "parentDocumentquerystring":parentDocumentquerystring
+    "parentDocumentquerystring":parentDocumentquerystring,
+    "addNestedDocuByPath":addNestedDocuByPath
 }
 
 

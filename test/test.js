@@ -1,4 +1,4 @@
-const {createModel,addNestedDocuById,makeFilterString,parentDocumentquerystring} = require("../main");
+const {createModel,addNestedDocuById,makeFilterString,parentDocumentquerystring,addNestedDocuByPath} = require("../main");
 const mongoose = require("mongoose");
 
 
@@ -13,9 +13,9 @@ mongoose.connect("mongodb://localhost:27017/moduletestDB").then(() =>{
     const person = createModel(schema,"person");
 
     const entry = new person({
-        name:"willy",
+        name:"james",
         age:4,
-        wifeName:"hardy"
+        wifeName:"sandy"
 
     });
 
@@ -27,30 +27,32 @@ mongoose.connect("mongodb://localhost:27017/moduletestDB").then(() =>{
 
 
 
-    const options = {
-        "model":person,
-        id:"634af140d06da2ba3982999e",
-        docu:{father:"elder",mother:"tongue"},
-        docuField:"extended_family"
-    }
+    // const options = {
+    //     "model":person,
+    //     id:"634b78001009c590c3d47b00",
+    //     docu:{father:"elder",mother:"tongue"},
+    //     docuField:"extended_family"
+    // }
 
-    addNestedDocuById(options,function(err,result){
-        if(err){
-            console.log(err);
-            return;
-        }
+    // addNestedDocuById(options,function(err,result){
+    //     if(err){
+    //         console.log(err);
+    //         return;
+    //     }
 
-        console.log(result)
-    });
+    //     console.log(result)
+    // });
 
-    // person.findById("634a1281fc000e9f7dbec35f",function(err,res){
+    // person.findById("634b780d3dff7ea7ed74cdfc",function(err,res){
     //     if(!res){
     //         console.log(`No document found with id`);
     //     }
-    //  console.log(err);
-    //  console.log(res);
-    // })
+    //  console.log(res["extended_family"][0]);
+   
+    // }).select("extended_family");
 
+
+    addNestedDocuByPath([1,1],person,{"father":"mal"},"634b78001009c590c3d47b00","extended_family");
 
 
 
