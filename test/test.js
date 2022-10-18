@@ -54,19 +54,19 @@ mongoose.connect("mongodb://localhost:27017/moduletestDB").then(() =>{
 
     // addNestedDocuByPath([1,1],person,{"father":"mal"},"634b78001009c590c3d47b00","extended_family");
     const options = {
-        path:[1,1],
+        path:[1,0],
         modelName:person,
         docu:{"father":"mal"},
         id:"634b78001009c590c3d47b00",
         docuField:"extended_family"
     }
-    findNestedDocuByPath(options,function(err,returned){
-        if(err){
-            console.log(err)
-        }else{
-            console.log(returned)
-        }
-    })
+    // findNestedDocuByPath(options,function(err,returned){
+    //     if(err){
+    //         console.log(err)
+    //     }else{
+    //         console.log(returned)
+    //     }
+    // })
 
 
 
@@ -80,5 +80,7 @@ mongoose.connect("mongodb://localhost:27017/moduletestDB").then(() =>{
 }).catch((err)=>{
     console.log(err);
 })
+
+
 
 
