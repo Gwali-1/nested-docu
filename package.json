@@ -4,7 +4,8 @@
   "description": "nested-docu module helps you create mongodb collections with nested documents easily",
   "main": "main.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "clear_jest": "jest --clearCache"
   },
   "author": "gwali",
   "license": "MIT",

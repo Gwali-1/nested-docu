@@ -40,7 +40,7 @@ describe('testing conditions for the addNestedDocuByPath method',function(){
         const options = {
             path:[0],
             modelName:person,
-            docu:{father:"mal",mother:"juliet"},
+            docu:"",
             id:"634f5d19ff6c233401231222",
             docuField:"extended_family"
         }
@@ -60,10 +60,10 @@ describe('testing conditions for the addNestedDocuByPath method',function(){
 
     test('adds a  nested document  inside document whose path is given ',function(done){
         const options = {
-            path:[1,0],
+            path:[0],
             modelName:person,
             docu:{"father":"mal"},
-            id:"634f5d19ff6c233401231222",
+            id:"634f5e7a5258453f708aaf41",
             docuField:"extended_family"
         }
 
@@ -73,7 +73,7 @@ describe('testing conditions for the addNestedDocuByPath method',function(){
 
         }
 
-        addNestedDocuById(options,callback)
+        addNestedDocuByPath(options,callback)
     
 
     });

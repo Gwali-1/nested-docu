@@ -55,13 +55,11 @@ const addNestedDocuByPath = function(config,fn){ //make argument into an object
 
     for(const key of fields){
         if(!config.hasOwnProperty(key)){
-           const err = new Error(`${key} field not provided`);
-           return fn(err,null);
+            throw new Error(`${key} field not indicated`);
         }
-        
-        if(config[key] === undefined){
-            const err = new Error(`no value for '${key}' key specified`);
-           return fn(err,null);
+   
+        if(config[key] === undefined || !config[key] || config[key] === "" ){
+            throw new Error(`no value for '${key}' key specified`);
            
         }
     }
@@ -118,19 +116,18 @@ const addNestedDocuByPath = function(config,fn){ //make argument into an object
 
 //find by path
 const findNestedDocuByPath = function(config,fn){
-    const {path,modelName,docu,id,docuField} = config;
+    const {path,modelName,id,docuField} = config;
 
     const fields = ["modelName","path","id",'docu',"docuField"];
     for(const key of fields){
         if(!config.hasOwnProperty(key)){
-           const err = new Error(`${key} field not provided`);
-           return fn(err,null);
+           throw new Error(`${key} field not provided`);
+
         }
         
-        if(config[key] === undefined){
-            const err = new Error(`no value for '${key}' key specified`);
-           return fn(err,null);
-           
+        if(config[key] === undefined || !config[key] || config[key] === ""){
+           throw new Error(`no value for '${key}' key specified`);
+   
         }
     }
 
@@ -193,7 +190,7 @@ const addNestedDocuById = function(options,fn){
             
         }
         
-        if(options[key] === undefined){
+        if(options[key] === undefined || !options[key] || options[key] === "" ) {
             throw new Error(`no value for '${key}' key specified`);
             
         }
