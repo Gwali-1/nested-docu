@@ -16,11 +16,7 @@ const person = createModel(schema,"person");
 describe('testing conditions for the addNestedDocuById method',function(){
 
 
-
-    test('throws error if  no field in objject argument (id) provided', ()=>{  
-        
-
-
+    test('throws error if  no field in object argument (id) provided', ()=>{  
         const options = {
         "model":person,
         docu:{father:"elder",mother:"tongue"},
@@ -61,8 +57,6 @@ describe('testing conditions for the addNestedDocuById method',function(){
 
 
     test('adds an array of nested document  inside document whose id is given',function(done){
-    
-
         const options = {
             model:person,
             id:"634f5d19ff6c233401231222",
@@ -80,6 +74,6 @@ describe('testing conditions for the addNestedDocuById method',function(){
         addNestedDocuById(options,callback)
     
 
-    })
+    });
 
 });
