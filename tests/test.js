@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 
 
 mongoose.connect("mongodb://localhost:27017/moduletestDB").then(() =>{
+
     const schema = {
         name:String,
         age:Number,
@@ -13,13 +14,13 @@ mongoose.connect("mongodb://localhost:27017/moduletestDB").then(() =>{
     const person = createModel(schema,"person");
 
     const entry = new person({
-        name:"james",
+        name:"jack",
         age:4,
-        wifeName:"sandy"
+        wifeName:"loverrr"
 
     });
 
-    // entry.save()
+    entry.save()
 
 
    
@@ -53,13 +54,13 @@ mongoose.connect("mongodb://localhost:27017/moduletestDB").then(() =>{
 
 
     // addNestedDocuByPath([1,1],person,{"father":"mal"},"634b78001009c590c3d47b00","extended_family");
-    const options = {
-        path:[1,0],
-        modelName:person,
-        docu:{"father":"mal"},
-        id:"634b78001009c590c3d47b00",
-        docuField:"extended_family"
-    }
+    // const options = {
+    //     path:[1,0],
+    //     modelName:person,
+    //     docu:{"father":"mal"},
+    //     id:"634b78001009c590c3d47b00",
+    //     docuField:"extended_family"
+    // }
     // findNestedDocuByPath(options,function(err,returned){
     //     if(err){
     //         console.log(err)
@@ -72,10 +73,10 @@ mongoose.connect("mongodb://localhost:27017/moduletestDB").then(() =>{
 
 
 
-    console.log(makeFilterString("comments",[2,4,5]));
+    // console.log(makeFilterString("comments",[2,4,5]));
     // console.log(parentDocumentquerystring("comments",[2,4,5]));
 
-    console.log("module created");
+    console.log("module created",typeof(person));
 
 }).catch((err)=>{
     console.log(err);
