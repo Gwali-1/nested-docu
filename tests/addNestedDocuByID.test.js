@@ -1,31 +1,85 @@
 const {addNestedDocuById,createModel} = require("../main");
 const mongoose = require("mongoose");
 
+mongoose.connect("mongodb://localhost:27017/moduletestDB");
+const schema = {
+    name:String,
+    age:Number,
+    wifeName:String
+}
+
+const person = createModel(schema,"person");
+
+
 
 
 describe('testing conditions for the addNestedDocuById method',function(){
-    test('throws error if  no argument (id) provided', ()=>{  
 
 
-    mongoose.connect("mongodb://localhost:27017/moduletestDB");
+
+    test('throws error if  no field in objject argument (id) provided', ()=>{  
+        
 
 
-    const schema = {
-        name:String,
-        age:Number,
-        wifeName:String
+        const options = {
+        "model":person,
+        docu:{father:"elder",mother:"tongue"},
+        docuField:"extended_family"
     }
 
-    const person = createModel(schema,"person");
-   
+        expect(() => addNestedDocuById(options,(err,res) =>{})).toThrow(Error);
 
-    const options = {
-    "model":person,
-    docu:{father:"elder",mother:"tongue"},
-    docuField:"extended_family"
+    });
+
+
+
+
+
+
+
+
+    test('throws error if no value for field (model) is provided',function(){
+
+        const options = {
+        "model":"",
+        id:"634b78001009c590c3d47b00",
+        docu:{father:"elder",mother:"tongue"},
+        docuField:"extended_family"
     }
 
-     expect(() => addNestedDocuById(options,(err,res) =>{})).toThrow(Error);
-})
+    expect(() => addNestedDocuById(options,(err,res) =>{})).toThrow(Error);
+
+
+
+
+    });
+
+
+
+
+
+
+
+    test('adds an array of nested document  inside document whose id is given',function(done){
+    
+
+        const options = {
+            model:person,
+            id:"634f5d19ff6c233401231222",
+            docu:{father:"javi",mother:"label"},
+            docuField:"extended_family"
+
+        }
+
+        function callback(error,result){
+         expect(error).toBeNull();
+         done()
+
+        }
+
+        addNestedDocuById(options,callback)
+    
+
+    })
 
 });

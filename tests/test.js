@@ -28,21 +28,21 @@ mongoose.connect("mongodb://localhost:27017/moduletestDB").then(() =>{
 
 
 
-    // const options = {
-    //     "model":person,
-    //     id:"634b78001009c590c3d47b00",
-    //     docu:{father:"elder",mother:"tongue"},
-    //     docuField:"extended_family"
-    // }
+    const options = {
+        "model":person,
+        id:"634f5e7a5258453f708aaf41",
+        docu:{father:"elder",mother:"tongue"},
+        docuField:"extended_family"
+    }
 
-    // addNestedDocuById(options,function(err,result){
-    //     if(err){
-    //         console.log(err);
-    //         return;
-    //     }
+    addNestedDocuById(options,function(err,result){
+        if(err){
+            console.log(err);
+            return;
+        }
 
-    //     console.log(result)
-    // });
+        console.log(result)
+    });
 
     // person.findById("634b780d3dff7ea7ed74cdfc",function(err,res){
     //     if(!res){

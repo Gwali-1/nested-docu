@@ -7,12 +7,11 @@ const mongoose = require("mongoose");
 
 //create model that allows easy nested object insertions
 const createModel  = function(fields,name){
-    console.log({...fields});
     try{
         const newSchema = new mongoose.Schema({...fields},{strict:false});
         return  mongoose.model(name,newSchema);
     }catch(err){
-        console.log(err);
+        throw err;
 
     }
 
@@ -69,7 +68,6 @@ const addNestedDocuByPath = function(config,fn){ //make argument into an object
 
     modelName.findById(id,function(err,returned){
         if(err){
-            console.log(err);
             return fn(err, null);
         }
 
@@ -82,13 +80,12 @@ const addNestedDocuByPath = function(config,fn){ //make argument into an object
             parentObject = parentObject[key][docuField];  
         });
         
-        console.log(filterString);
+    
         docu.path=[...path,parentObject.length];  // 
         docu.extended_family=[];
 
         modelName.findByIdAndUpdate(id,{"$push":{[filterString]:docu }},{strict:false},(err,response) => {  
             if(err){
-             console.log(err);
              return fn(err,null);
             }
             
@@ -141,7 +138,6 @@ const findNestedDocuByPath = function(config,fn){
 
     modelName.findById(id,function(err,returned){
         if(err){
-            console.log(err);
             return fn(err,null);
         }
 
@@ -194,6 +190,7 @@ const addNestedDocuById = function(options,fn){
     for(const key of fields){
         if(!options.hasOwnProperty(key)){
             throw new Error(`${key} field not indicated`);
+            
         }
         
         if(options[key] === undefined){
@@ -204,7 +201,6 @@ const addNestedDocuById = function(options,fn){
 
 
     const {model,id,docu,docuField} = options;
-    console.log(docuField);
 
 
     model.findById(id,function(err,returned){
@@ -215,13 +211,11 @@ const addNestedDocuById = function(options,fn){
                 return fn(new Error(`No document found with id ${id}`));
             }
             if(returned.hasOwnProperty(docuField)){
-                console.log("this is it =>",returned[docuField].length);
                 const NestedArrayLength = returned[docuField].length; //to see how many nested objects in the the first level
                 docu.path = [];
                 docu[docuField] = [];
                 //add  head document id to each nested docu  parentId:returned._id
                 docu.path.push(NestedArrayLength);
-                console.log("this is it =>",returned[docuField]);
                 model.findByIdAndUpdate(id,{"$push":{[docuField]:docu }},(err,response) => {
                     if(err){
                      return fn(err,null);
