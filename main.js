@@ -22,6 +22,10 @@ const createModel  = function(fields,name){
 
 //helper fucntion
 const makeFilterString  = function(docuField,path){
+    console.log(path,docuField);
+    if(!docuField || !path || path.length <= 0){
+        throw new Error("Invalid or no arguments provided");
+    }
     let filterString = `${docuField}`;
     path.forEach((index) =>{
         filterString+=`.${index}.${docuField}`;
