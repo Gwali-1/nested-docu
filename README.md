@@ -9,17 +9,17 @@ After coming up with this , the rest was fairly straightforward , any nested doc
 There are 4  methods 
 `createModel`,`addNestedDocuById`,`addNestedDocuByPath`,`findNestedDocuByPath`
 
-**createModel**
+createModel 
   *Create a mongoose model easily using this function, takes in the schema object and the name of the model as argument.The model is created with the strict option set to false.This allows addidtion of fields to the model that were not specified in schema upon creation*
 
-**addNestedDocuById**
+### addNestedDocuById
  *add a field to a document that contains an array of nested documents. if you add a nested  document(docu) by id t a document, the field name you specify becomes a field in the document whose value is an array containing the document zyou want to add, ay new document You want to nest in the document with the specifies id is pushed to the end of the list if it is an exiting field or added to an array whose field name is the name you give*
 
-**addNestedDocuByPath**
+### addNestedDocuByPath
 *For every nested document added, it contains a  field thay is calculated according to its parent documents or how deep it is nested, the `path`. This is an array of integers that represent a pth to the document starting from the first array of nested dcuments. using this function , you provide the path of the document amont other arguments and  this adds a nested document into that doucument.*
 
 
-**findNestedDocuByPath**
+### findNestedDocuByPath
 *Same way you can locate nested document and update them by path , we use the path to locate nested documents and return the document. this method also takes in the path among other argument to work*
 
 
