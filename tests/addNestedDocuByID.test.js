@@ -59,7 +59,7 @@ describe('testing conditions for the addNestedDocuById method',function(){
     test('adds an array of nested document  inside document whose id is given',function(done){
         const options = {
             model:person,
-            id:"634f5d19ff6c233401231222",
+            id:"634f5d2f9c224f3d007565c8",
             docu:{father:"javi",mother:"label"},
             docuField:"extended_family"
 

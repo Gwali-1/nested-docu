@@ -21,8 +21,7 @@ const createModel  = function(fields,name){
 
 
 //helper fucntion
-const makeFilterString  = function(docuField,path){
-    console.log(path,docuField);
+const makeFilterString  = function(docuField,path){  
     if(!docuField || !path || path.length <= 0){
         throw new Error("Invalid or no arguments provided");
     }
