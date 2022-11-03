@@ -9,7 +9,7 @@ After coming up with this , the rest was fairly straightforward , any nested doc
 There are 4  methods 
 `createModel`,`addNestedDocuById`,`addNestedDocuByPath`,`findNestedDocuByPath`
 
-createModel 
+### createModel 
   *Create a mongoose model easily using this function, takes in the schema object and the name of the model as argument.The model is created with the strict option set to false.This allows addidtion of fields to the model that were not specified in schema upon creation*
 
 ### addNestedDocuById
