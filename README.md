@@ -38,4 +38,8 @@ There are 4  methods
 ## usage
 
 
+  print()
+  lo
+
+
 
