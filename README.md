@@ -37,9 +37,52 @@ There are 4  methods
 
 ## usage
 
+### create model
+```
+const {createModel} = require("nested-docu");
+const mongoose = require("mongoose");
 
-        print()
-        lo
+const schema = {
+    name:String,
+    age:Number,
+    wifeName:String
+}
+const person = createModel(schema,"person");
+```
+
+
+
+
+### addNestedDocyById
+```
+const {addNestedDocuById} = require("nested-docu");
+const mongoose = require("mongoose");
+
+const schema = {
+    name:String,
+    age:Number,
+    wifeName:String
+}
+const person = createModel(schema,"person");
+
+
+ const config = {
+            model:person,
+            id:"634f5d2f9c224f3d007565c8",
+            docu:{father:"javi",mother:"label"},
+            docuField:"extended_family"
+}
+
+ addNestedDocuById(config,(err,res) =>{
+  if(err){
+    //
+  }else{
+    //
+  }
+}
+```
+
+
 
 
 
