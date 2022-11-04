@@ -53,19 +53,28 @@ const person = createModel(schema,"person");
 
 
 
+
+
 ### addNestedDocyById
 ```
 const {addNestedDocuById} = require("nested-docu");
 const mongoose = require("mongoose");
+
+
+//make sure you have established database connection
+
 
 const schema = {
     name:String,
     age:Number,
     wifeName:String
 }
+
+//get model object 
 const person = createModel(schema,"person");
 
 
+//create arguent object with all fields specified as done here
  const config = {
             model:person,
             id:"634f5d2f9c224f3d007565c8",
@@ -82,6 +91,93 @@ const person = createModel(schema,"person");
 }
 ```
 
+
+
+
+
+
+
+
+### addNestedDocyByPath
+```
+const {addNestedDocuByPath} = require("nested-docu");
+const mongoose = require("mongoose");
+
+
+//make sure you have established databse connection
+
+
+const schema = {
+    name:String,
+    age:Number,
+    wifeName:String
+}
+
+//get model object 
+const person = createModel(schema,"person");
+
+
+//create arguent object with all fields specified as done here
+  const config = {
+            path:[0],
+            modelName:person,
+            docu:{"father":"mal"},
+            id:"634f5e7a5258453f708aaf41",
+            docuField:"extended_family"
+        }
+
+ addNestedDocuByPath(config,(err,res) =>{
+  if(err){
+    //
+  }else{
+    //
+  }
+}
+```
+
+
+
+
+
+
+
+
+### findNestedDocuByPath
+```
+const {findNestedDocuByPath} = require("nested-docu");
+const mongoose = require("mongoose");
+
+
+//make sure you have established databse connection
+
+
+const schema = {
+    name:String,
+    age:Number,
+    wifeName:String
+}
+
+//get model object 
+const person = createModel(schema,"person");
+
+
+//create arguent object with all fields specified as done here
+  const config = {
+            path:[0,0],
+            modelName:person,
+            docu:{"father":"mal"},
+            id:"634f5e7a5258453f708aaf41",
+            docuField:"extended_family"
+        }
+
+ findNestedDocuByPath(config,(err,res) =>{
+  if(err){
+    //
+  }else{
+    //
+  }
+}
+```
 
 
 
