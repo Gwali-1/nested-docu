@@ -8,8 +8,9 @@ const mongoose = require("mongoose");
 //create model that allows easy nested object insertions
 const createModel  = function(fields,name){
     try{
-        const newSchema = new mongoose.Schema({...fields},{strict:false});
-        return  mongoose.model(name,newSchema);
+        const newSchema = new mongoose.Schema(fields,{strict:false});
+       const newModel = mongoose.model(name,newSchema);
+       return newModel;
     }catch(err){
         throw err;
 
@@ -121,7 +122,7 @@ const addNestedDocuByPath = function(config,fn){ //make argument into an object
 const findNestedDocuByPath = function(config,fn){
     const {path,modelName,id,docuField} = config;
 
-    const fields = ["modelName","path","id",'docu',"docuField"];
+    const fields = ["modelName","path","id","docuField"];
     for(const key of fields){
         if(!config.hasOwnProperty(key)){
            throw new Error(`${key} field not provided`);

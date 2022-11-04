@@ -166,7 +166,6 @@ const person = createModel(schema,"person");
   const config = {
             path:[0,0],
             modelName:person,
-            docu:{"father":"mal"},
             id:"634f5e7a5258453f708aaf41",
             docuField:"extended_family"
         }
