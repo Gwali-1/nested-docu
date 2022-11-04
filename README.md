@@ -4,6 +4,17 @@ A node package that makes it easy to created infinite nested documents in mongoD
 ODM package to establish connection to the database and query it. The module exposes 4 main  methods to perform operations such as creating a model in mongoose(a database collection), add a first level nested document or object to a document , ability to do deep nesting in documents that are nested themselves and finding and retrieving nested documents regardless of how deep they are nested. Creating infinite nested documents with the methods in moongose is no easy task as it becomes difficult to query very deep nested documents. The main issue is with locating them , especially in situations where their position cannot be hard coded and updating them happens often. An example of this is a comment sysytem on a website where each comment can also be commented on and so on.
 
 
+
+## Features
+
+- Create a collections/models in database easily 
+- Add a  nested document to another document easily(first level nesting)
+- Add nested documents to another document regardless of its position(deep and infinite nesting)
+- Find and retrieve  a nested document no matter how deeply it is nested
+
+
+
+
 # How does nested-docu work
 
 To make finding and quering documents no matter how deep they are nested, nested docu has locating system where each nested document has  breadcrumps to its postion, a path. This  is a  list of integers that are stored in an array and is a property on each nested document. they act as index values or the indexing you have perform on the parent document to reach a child document(the desired nested document).
@@ -23,13 +34,6 @@ There are 4  methods
 ### findNestedDocuByPath
 *Same way you can locate nested document and update them by path , we use the path to locate nested documents and return the document. This method also takes in the path among other argument to work*
 
-
-## Features
-
-- Create a collections/models in database easily 
-- Add a  nested document to another document easily(first level nesting)
-- Add nested documents to another document regardless of its position(deep level nesting)
-- Find and retrieve  a nested document no matter how deeply it is nested
 
 
 ## Dependency
