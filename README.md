@@ -28,6 +28,7 @@ There are 4  methods
 - create a collections in database easily 
 - add a  nested document to another document easily(first level nesting)
 - add nested documents to another document regardless of its position(deep level nesting)
+- find and retrieve  a nested document no matter how deeply it is nested
 
 
 ## Dependenc
