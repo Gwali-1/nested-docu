@@ -1,10 +1,5 @@
 const mongoose = require("mongoose");
 
-
-
-
-
-
 //create model that allows easy nested object insertions
 const createModel  = function(fields,name){
     try{
@@ -19,8 +14,6 @@ const createModel  = function(fields,name){
 
 }
 
-
-
 //helper fucntion
 const makeFilterString  = function(docuField,path){  
     if(!docuField || !path || path.length <= 0){
@@ -32,21 +25,6 @@ const makeFilterString  = function(docuField,path){
     });
     return filterString;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //add nested object using path property on parent object
 //you locate thr parent object we'll insert with the path 
 //need a query string builder , need to write a fuction for that
@@ -98,26 +76,6 @@ const addNestedDocuByPath = function(config,fn){ //make argument into an object
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //find by path
 const findNestedDocuByPath = function(config,fn){
     const {path,modelName,id,docuField} = config;
@@ -162,28 +120,6 @@ const findNestedDocuByPath = function(config,fn){
     }).select(docuField);
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 const addNestedDocuById = function(options,fn){
@@ -241,8 +177,6 @@ const addNestedDocuById = function(options,fn){
     });
 
 }
-
-
 
 
 
